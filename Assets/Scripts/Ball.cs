@@ -5,8 +5,6 @@ using UnityEngine;
 public class Ball : MonoBehaviour
 {
     [SerializeField] Paddle paddle1;
-    [SerializeField] float xPush = 2f;
-    [SerializeField] float yPush = 2f;
     bool hasStarded = false;
 
 // Vector 2 represents the 2D vectors and points
@@ -27,7 +25,7 @@ public class Ball : MonoBehaviour
     private void launchBallMouseClick() {
         if (Input.GetMouseButtonDown(0)) {
             hasStarded = true;
-            GetComponent<Rigidbody2D>().velocity = new Vector2(xPush, yPush);
+            GetComponent<Rigidbody2D>().velocity = new Vector2(2f, 15f);
         }
     }
     void Update()

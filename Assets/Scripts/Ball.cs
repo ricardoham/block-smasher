@@ -5,6 +5,9 @@ using UnityEngine;
 public class Ball : MonoBehaviour
 {
     [SerializeField] Paddle paddle1;
+    [SerializeField] float xPush = 2f;
+    [SerializeField] float yPush = 2f;
+    bool hasStarded = false;
 
 // Vector 2 represents the 2D vectors and points
     Vector2 paddleToBallVector;
@@ -15,9 +18,23 @@ public class Ball : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
-    {
+    private void handleBallFixedToPaddle() {
         Vector2 paddlePos = new Vector2(paddle1.transform.position.x, paddle1.transform.position.y);
         transform.position = paddlePos + paddleToBallVector;
+
+    }
+
+    private void launchBallMouseClick() {
+        if (Input.GetMouseButtonDown(0)) {
+            hasStarded = true;
+            GetComponent<Rigidbody2D>().velocity = new Vector2(xPush, yPush);
+        }
+    }
+    void Update()
+    {
+        if (!hasStarded) {
+            handleBallFixedToPaddle();
+            launchBallMouseClick();
+        }
     }
 }
